@@ -7,7 +7,7 @@ const Form = () => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Obtener lista de países desde el API
+
   useEffect(() => {
     const fetchCountries = async () => {
       try {
