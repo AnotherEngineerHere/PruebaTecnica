@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Form.css';
+
 const Form = () => {
   const [fullName, setFullName] = useState('');
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -22,7 +22,6 @@ const Form = () => {
     fetchCountries();
   }, []);
 
-  // Manejar cambios en los campos del formulario
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === 'fullName') {
@@ -32,7 +31,6 @@ const Form = () => {
     }
   };
 
-  // Enviar formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (fullName && selectedCountry) {
@@ -52,48 +50,45 @@ const Form = () => {
   };
 
   return (
-    <div class="login-box">
+    <div className="login-box">
       <h2>Formulario</h2>
       {submitted ? (
         <p>¡Formulario enviado con éxito!</p>
-
       ) : (
         <form onSubmit={handleSubmit}>
-           <div class="user-box">
-            <label>
-              Nombre completo:
-              <input
-                type="text"
-                name="fullName"
-                value={fullName}
-                onChange={handleInputChange}
-                required
-              />
-            </label>
+          <div className="form-group">
+            <label htmlFor="fullName">Nombre completo:</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={fullName}
+              onChange={handleInputChange}
+              required
+            />
           </div>
-          <div class="user-box">
-            <label>
-              País:
-              <select
-                name="selectedCountry"
-                value={selectedCountry}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="">Seleccionar país</option>
-                {countries.map((country) => (
-                  <option key={country} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <div className="form-group">
+            <label htmlFor="selectedCountry">País:</label>
+            <select
+              id="selectedCountry"
+              name="selectedCountry"
+              value={selectedCountry}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Seleccionar país</option>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
-          <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-          <button className='#' type="submit">Enviar</button>
+          <div className="form-group">
+            <button className="submit-button" type="submit">
+              Enviar
+            </button>
+          </div>
         </form>
       )}
     </div>
